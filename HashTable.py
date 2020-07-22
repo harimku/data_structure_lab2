@@ -39,8 +39,8 @@ class DynamicArray():
         for i in range(self.curr_size-1, 0, -1):
             self.list[i] = self.list[i - 1]
         self.list[0] = newItem
+        self.ArrayListInsertAfter(self.curr_size-1, last_val)
         self.curr_size += 1
-        self.ArrayListAppend(last_val)
 
     def ArrayListInsertAfter(self, index, newItem):
         if (self.allocationSize == self.curr_size):
@@ -62,7 +62,8 @@ class DynamicArray():
     
     def ArrayListRemoveAt(self, index):
         if (index >= 0 and index < len(self.list)):
-            self.list[index] = 0 
+            for i in range(len(self.list)-1):
+                self.list[i] = self.list[i + 1]
             self.curr_size -= 1
     
     def __len__(self):
@@ -152,6 +153,28 @@ class HashTable(object):
 
 
 def main():
+    '''
+    ##Test for Dynamic Array Operations
+    arr = DynamicArray(6)
+    print(arr.list)
+    arr.ArrayListAppend(100)
+    print(arr.list)
+    arr.ArrayListAppend(200)
+    print(arr.list)
+    arr.ArrayListAppend(300)
+    print(arr.list)
+    arr.ArrayListAppend(400)
+    print(arr.list)
+    arr.ArrayListPrepend(5)
+    print(arr.list)
+    arr.ArrayListPrepend(1)
+    print(arr.list)
+    x = arr.ArrayListSearch(100)
+    print(x)
+    arr.ArrayListRemoveAt(0)
+    print(arr.list)
+    '''
+
     # colors
     fg = lambda text, color: "\33[38;5;" + str(color) + "m" + text + "\33[0m"
     bg = lambda text, color: "\33[48;5;" + str(color) + "m" + text + "\33[0m"
@@ -183,7 +206,6 @@ def main():
     print(fg('\tMaximum = ' + str(ht.maximum), 3))
     print(fg('\tUsed = ' + str(float(used) / float(ht.getSize() * 100.0 )) + "%", 3))
     print(fg('\tCollisions = ' + str(float(ht.getCollisions()) / float(len(data)) * 100.0) + "%", 3))
-
     
 
 if __name__ == '__main__':
