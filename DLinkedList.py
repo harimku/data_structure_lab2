@@ -12,6 +12,8 @@ class Node:
         self.previous = None
         # introduce a 'next' node for doubly linked list
         self.next = None
+        self.node = self.data
+
     def get(self):
         return self.data
     def getPrev(self):
@@ -24,9 +26,13 @@ class Node:
         self.next = new_next
     def set(self,data):
         self.data = data
-    node = property(get,set)
-    prev = property(getPrev,setPrev)
-    next = property(getNext, setNext)
+    def next(self):
+        self.setNext(self.getNext)
+    def prev(self):
+        self.setPrev(self.getPrev)
+    #node = property(get,set)
+    #prev = property(getPrev,setPrev)
+    #next = property(getNext, setNext)
 
 class DList:
     def __init__(self):
